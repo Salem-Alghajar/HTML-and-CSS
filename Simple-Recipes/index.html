@@ -3,96 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salem Alghajar | Home</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <title>Simple Recipes | Culinary Inspiration</title>
     <style>
-        :root { --bg-dark: #0f172a; --accent-cyan: #22d3ee; }
-        body { background-color: var(--bg-dark); color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .navbar { background: rgba(15, 23, 42, 0.9) !important; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(34, 211, 238, 0.2); }
-        .nav-link { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: white !important; }
-        .nav-link:hover { color: var(--accent-cyan) !important; }
-        .jumbotron-custom { padding: 8rem 2rem; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); text-align: center; }
-        .jumbotron-custom h1 { font-family: 'Syncopate', sans-serif; font-size: 4rem; background: linear-gradient(to right, #fff, var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card { background-color: #1e293b; border: 1px solid rgba(255,255,255,0.1); color: white; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent-cyan); }
-        .card-img-top { height: 400px; object-fit: cover; }
-        footer { border-top: 1px solid #334155; padding: 2rem 0; margin-top: 5rem; color: #94a3b8; }
+        /* Base Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        /* Navigation Bar Architecture */
+        header {
+            background-color: #0d876d;
+            border-bottom: 4px solid #f2a9ba;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu > li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #f2a9ba;
+            padding: 15px 30px;
+            display: block;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Dropdown Functionality */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: #0d876d;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Content Container */
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Section Layouts */
+        .recipe-section {
+            margin-bottom: 60px;
+            padding-top: 80px; 
+            margin-top: -60px; 
+        }
+
+        .recipe-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .recipe-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Content Cards (Instructions, About, and Contact) */
+        .recipe-instructions, .about-content, .contact-content {
+            background: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input, .contact-form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background-color: #0d876d;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand text-info fw-bold" href="index.html">SALEM.DEV</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#showtimes">SHOWTIMES</a></li>
-                    <!-- LINK TO EXTERNAL CONTACT PAGE -->
-                    <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <header class="jumbotron-custom">
-        <div class="container">
-            <h1>SALEM ALGHAJAR</h1>
-            <p class="lead text-info">DIGITAL CINEMA EXPERIENCE</p>
+    <!-- Main Site Navigation -->
+    <header>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a href="#featured">Recipes</a>
+                    <div class="dropdown-content">
+                        <a href="#featured">Featured</a>
+                        <a href="#pasta">Pasta</a>
+                        <a href="#chicken">Chicken</a>
+                        <a href="#pork">Pork</a>
+                        <a href="#biscuits">Biscuits</a>
+                        <a href="#fish">Fish</a>
+                        <a href="#dessert">Dessert</a>
+                    </div>
+                </li>
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#contact">Get In Touch</a></li>
+            </ul>
         </div>
     </header>
 
-    <section id="showtimes" class="container mt-5">
-        <h2 class="text-center mb-5 font-syncopate">NOW SHOWING</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Card 1 -->
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTcwMjcxYTQtYjJlOS00YTE1LWIyZGYtOGRlOTBlMWZmYTliXkEyXkFqcGc@._V1_.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title text-info">Kong: Skull Island</h5>
-                        <p class="card-text">A team of scientists and soldiers travel to an uncharted island in the Pacific.</p>
-                        <span class="badge rounded-pill bg-info text-dark">12:00 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">3:00 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">7:00 p.m.</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://m.media-amazon.com/images/M/MV5BNzBkNjdjZTctNjdhOS00NmIyLTlkNjQtY2EwNGMwYmZjNTIxXkEyXkFqcGc@._V1_.jpg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title text-info">Ghost in the Shell</h5>
-                        <p class="card-text">In the near future, Major is the first of her kind: a human saved from a crash.</p>
-                        <span class="badge rounded-pill bg-info text-dark">1:30 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">5:30 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">9:30 p.m.</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://lumiere-a.akamaihd.net/v1/images/p_beautyandthebeast_19752_32e65c36.jpeg" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title text-info">Beauty and the Beast</h5>
-                        <p class="card-text">A selfish Prince is cursed to become a monster for the rest of his life.</p>
-                        <span class="badge rounded-pill bg-info text-dark">12:00 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">3:00 p.m.</span>
-                        <span class="badge rounded-pill bg-info text-dark">7:00 p.m.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main>
+        <h1 class="page-title">Simple Recipes</h1>
 
-    <footer class="text-center">
-        <p>&copy; 2026 Designed by Salem Alghajar</p>
+        <!-- Highlighting our top pick for the week -->
+        <section id="featured" class="recipe-section">
+            <h2>Featured Recipe: Pizza & Broccoli</h2>
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pizza and Broccoli" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Pre-heat oven to 425°F. Roll out pizza dough and top with tomato sauce, mozzarella cheese, and your favorite toppings. Roast broccoli florets with olive oil, salt, and parmesan. Bake both until golden brown and delicious.</p>
+            </div>
+        </section>
+
+        <!-- Classic Pasta Dishes -->
+        <section id="pasta" class="recipe-section">
+            <h2>Easy Garlic Pasta</h2>
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pasta" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Boil pasta until al dente. In a pan, sauté minced garlic in olive oil until fragrant. Toss the cooked pasta in the garlic oil, add red pepper flakes, fresh parsley, and a generous sprinkle of parmesan cheese.</p>
+            </div>
+        </section>
+
+        <!-- Protein-focused entrees -->
+        <section id="chicken" class="recipe-section">
+            <h2>Lemon Herb Chicken</h2>
+            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chicken" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Marinate chicken breasts in lemon juice, olive oil, rosemary, and thyme. Sear in a hot skillet for 6-7 minutes on each side until cooked through. Serve with a side of roasted vegetables.</p>
+            </div>
+        </section>
+
+        <section id="pork" class="recipe-section">
+            <h2>Glazed Pork Chops</h2>
+            <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pork Chops" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Season pork chops with salt and pepper. Sear in a pan. Create a simple glaze using honey, soy sauce, and a dash of apple cider vinegar. Pour over the chops and simmer until sticky and fully cooked.</p>
+            </div>
+        </section>
+
+        <!-- Homemade Sides & Baking -->
+        <section id="biscuits" class="recipe-section">
+            <h2>Buttermilk Biscuits</h2>
+            <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Biscuits" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Mix flour, baking powder, and salt. Cut in cold butter until crumbly. Stir in buttermilk just until combined. Pat out the dough, cut into rounds, and bake at 400°F until golden brown and flaky.</p>
+            </div>
+        </section>
+
+        <!-- Healthy Seafood Options -->
+        <section id="fish" class="recipe-section">
+            <h2>Baked Salmon</h2>
+            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fish" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> Place salmon fillets on a baking sheet. Brush with a mix of melted butter, garlic, and dill. Bake at 375°F for 12-15 minutes until the fish flakes easily with a fork.</p>
+            </div>
+        </section>
+
+        <!-- Sweet Treats -->
+        <section id="dessert" class="recipe-section">
+            <h2>Simple Berry Parfait</h2>
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Dessert" class="recipe-image">
+            <div class="recipe-instructions">
+                <p><strong>Instructions:</strong> In a glass, layer Greek yogurt, your favorite granola, and a mix of fresh berries (strawberries, blueberries, raspberries). Repeat the layers and top with a drizzle of honey.</p>
+            </div>
+        </section>
+
+        <!-- Updated Mission Statement and Brand Philosophy -->
+        <section id="about" class="recipe-section">
+            <h2>Our Story</h2>
+            <div class="about-content">
+                <p>Simple Recipes was born out of a single kitchen in the heart of the U.S. with a clear vision: to strip away the intimidation of gourmet cooking. We believe that a great meal shouldn't require a culinary degree or a pantry full of obscure ingredients. Our philosophy centers on the beauty of fresh produce, high-quality proteins, and the joy of sharing a table with loved ones.</p>
+                <p>From the first-time cook to the busy parent, we provide a curated collection of tried-and-true favorites that prioritize flavor without the fuss. Every technique is vetted by our team to ensure your time in the kitchen is both productive and peaceful. Welcome to our community—where every dish is a celebration of simplicity.</p>
+            </div>
+        </section>
+
+        <!-- New Contact Section with Form -->
+        <section id="contact" class="recipe-section">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <p style="margin-bottom: 20px;">Have a question about a recipe or want to share your kitchen success? Drop us a message below!</p>
+                <form class="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Simple Recipes. Crafting delicious moments daily.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
